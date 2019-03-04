@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/primeicons/primeicons.css";
+@import "../node_modules/primeng/resources/themes/nova-light/theme.css";
+@import "../node_modules/primeng/resources/primeng.min.css";
+@import "../node_modules/primeflex/primeflex.css";
+@import "../node_modules/ngx-toastr/toastr.css";
+@import "../node_modules/font-awesome/css/font-awesome.css";
+
+.btn {
+  margin-right: 5px;
+}
+
+.full-width-row {
+  overflow-x: hidden;
+}
+
+.full-width-row > div {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+#toast-container > div {
+  opacity: 1;
+}
+
+label {
+  font-weight: 700;
+  font-size: 14px;
+  color: #5c666a;
+}
+
+
+.question-label {
+  font-size: 14px;
+  font-weight: 500;
+  font-size: 14px;  
+}
+
+
+.surveytext {
+  height:40px;
+  width: 250px;
+}
+
+.btn.btn-primary:disabled{
+  background-color: #BBDEFB;
+  color: #455A64;
+}

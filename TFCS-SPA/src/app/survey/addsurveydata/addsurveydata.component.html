@@ -1,0 +1,16 @@
+<h3>{{ company?.name | titlecase }} Survey</h3>
+<hr>
+
+  <p class="lead hd1">{{survey?.surveyIntro}}</p>
+
+
+<div class="surveycontent">
+    <div class="ml-3">
+        <app-dynamic-form *ngIf="qq" [questions]="qq"></app-dynamic-form>
+    </div>
+ 
+</div>
+
+ 
+
+

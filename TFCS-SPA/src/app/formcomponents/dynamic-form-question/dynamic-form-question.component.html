@@ -1,0 +1,54 @@
+<div *ngIf="form">
+
+
+  <div  [formGroup]="form">
+    <!-- <label [attr.for]="question.key">{{question.label}}</label> -->
+ 
+        <div class="question-label mb-1" [attr.for]="question.key">{{question.label}}</div>
+
+
+        <div [ngSwitch]="question.controlType">
+      
+          <div *ngSwitchCase="'text'">
+              <input class="form-control surveytext"  [formControlName]="question.key" [id]="question.key" type="text">
+          </div>
+           
+          <div *ngSwitchCase="'date'">
+              <p-calendar [name]="question.key" [formControlName]="question.key" [id]="question.key" inputStyleClass="form-control surveytext"></p-calendar>
+          </div>          
+        
+          <select [id]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key">
+            <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
+          </select>
+
+          <div *ngSwitchCase="'radio'">
+            <label *ngFor="let opt of question.options"  class="radio-inline mr-1">
+              <input type="radio" [id]="question.key" [formControlName]="question.key" [value]="opt.key">{{opt.value}}
+            </label>
+          </div>
+
+          <div *ngSwitchCase="'checkbox'">
+              <label *ngFor="let opt of question.options"  class="radio-inline mr-1">
+                <input type="checkbox" [id]="question.key" [formControlName]="question.key" [value]="opt.key">{{opt.value}}
+              </label>
+            </div>          
+
+          <div *ngSwitchCase="'memo'">
+              <textarea class="form-control ta" [formControlName]="question.key" [id]="question.key"></textarea>
+          </div>    
+
+  
+        </div> 
+        <div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div>
+
+  
+    
+  
+
+  
+    
+  </div>
+
+</div>
+
+ 

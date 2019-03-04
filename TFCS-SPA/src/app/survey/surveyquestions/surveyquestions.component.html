@@ -1,0 +1,26 @@
+
+<div class="jumbotron">
+  <h1 class="hd1">{{ company?.name | titlecase }} Survey</h1>
+  <p class="lead hd1">{{survey?.surveyIntro}}</p>
+  <hr class="my-4" />
+</div>
+
+<div class="surveycontent">
+    <div class="ml-3">
+        <app-dynamic-form *ngIf="qq" [questions]="qq"></app-dynamic-form>
+    </div>
+<!--     
+    <input class="surveyinput" type="hidden" name="companyId" id="companyId">  
+    <input class="surveyinput" type="hidden" name="surveyId" id="surveyId">  
+    </form> -->
+</div>
+
+<div class="surveyfooter hd1">
+    {{survey?.surveyFooterText}}
+</div>
+
+
+
+
+
+

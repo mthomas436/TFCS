@@ -1,0 +1,43 @@
+.navright {
+    margin-right:5px;
+  }
+  
+  .dropdown-toggle, .dropdown-item {
+    cursor: pointer;
+  }
+  
+  .profilename {
+    min-width: 170px;
+    color: fff;
+  }
+  .profileImage {
+    float: left;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+  .profileImage > img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .profile__avatar {
+    float: left;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 20px;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) {
+    .profile__avatar {
+      width: 35px;
+      height: 35px;
+    }
+  }
+  .profile__avatar > img {
+    width: 100%;
+    height: auto;
+  }

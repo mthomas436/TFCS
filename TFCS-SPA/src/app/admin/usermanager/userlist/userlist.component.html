@@ -1,0 +1,32 @@
+<h3>User Manager</h3>
+<hr>
+<div *ngIf="users">
+  <table class="table table-bordered table-hover">
+    <tr>
+      <th>Id</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Active</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let user of users">
+      <td>{{user.id}}</td>
+      <td>{{user.firstname}}</td>
+      <td>{{user.lastname}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.active}}</td>
+      <td>
+        <button class="btn btn-primary btn-sm" (click)="editUser(user)">Edit</button>
+      </td>
+    </tr>
+  </table>
+
+</div>
+
+
+<!-- <app-edituser *ngIf="selectedUser" [user]="selectedUser"></app-edituser> -->
+
+<p-dialog header="Edit User" [(visible)]="display" [style]="{width: '50%', height: '400px'}" positionTop="80" modal="true" dismissableMask="true" closeOnEscape="true">
+    <app-edituser *ngIf="selectedUser" [user]="selectedUser"></app-edituser>
+</p-dialog>

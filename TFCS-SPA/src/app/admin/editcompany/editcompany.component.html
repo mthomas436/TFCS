@@ -1,0 +1,44 @@
+<h3>Edit Company: {{company?.name}}</h3>
+<hr>
+
+<p-tabView>
+    <p-tabPanel header="Basic Setting">
+
+        <div class="form-group">
+            <label class="first" for="companyname">Company Name:</label>
+            <input type="companyname" class="form-control" id="companyname" [value]="company?.name" [(ngModel)]="companyName">
+        </div>
+
+        <h3>Active - {{active}} </h3>
+        <p-inputSwitch [(ngModel)]="active" (onChange)="updateActive($event)"></p-inputSwitch>
+
+        <div class="d-flex justify-content-end p-3"><button type="button" class="btn btn-primary" (click)="updateCompany()">Save Changes</button></div>
+    </p-tabPanel>
+    <p-tabPanel header="Add / Edit Surveys">
+
+    </p-tabPanel>
+    <p-tabPanel header="Survey Status">
+          <p-card header="Add / Remove Surveys" subheader="Click to Select" [style]="{width: '360px'}" styleClass="ui-card-shadow">
+              <p-header>
+                   <img *ngIf="dataReady" [src]="company.logoImagePath"> 
+              </p-header>
+              <div>
+                  <div *ngFor="let type of surveyTypes">
+                   <p-checkbox  name="grpsurveytypes" [value]="type.surveyTypeId" [label]="type.description" [(ngModel)]="selectedSurveyTypes"></p-checkbox>
+                  </div>
+
+                  {{selectedSurveyTypes | json}}
+             </div>
+                  
+              <p-footer>
+                  <button pButton (click)="updateCompanySurveys()" type="button" label="Save" icon="pi pi-check" style="margin-right: .25em"></button>
+              </p-footer>
+          </p-card>
+
+    </p-tabPanel>
+    <p-tabPanel header="Manage Users">
+        Manage Users
+    </p-tabPanel>
+</p-tabView>
+
+{{company | json}}

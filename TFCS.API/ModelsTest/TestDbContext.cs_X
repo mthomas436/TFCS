@@ -1,0 +1,180 @@
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+
+namespace TFCS.API.ModelsTest
+{
+    public partial class TestDbContext : DbContext
+    {
+        public TestDbContext()
+        {
+        }
+
+        public TestDbContext(DbContextOptions<TestDbContext> options)
+            : base(options)
+        {
+        }
+
+        public virtual DbSet<Company> Company { get; set; }
+        public virtual DbSet<Survey> Survey { get; set; }
+        public virtual DbSet<SurveyOption> SurveyOption { get; set; }
+        public virtual DbSet<SurveyOptionType> SurveyOptionType { get; set; }
+        public virtual DbSet<SurveyQuestion> SurveyQuestion { get; set; }
+        public virtual DbSet<SurveyResponse> SurveyResponse { get; set; }
+        public virtual DbSet<SurveyType> SurveyType { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Server=DESKTOP-OI2KT74;Initial Catalog=TestDb;Integrated Security=True");
+            }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasAnnotation("ProductVersion", "2.2.1-servicing-10028");
+
+            modelBuilder.Entity<Company>(entity =>
+            {
+                entity.Property(e => e.Active)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LogoImagePath)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Survey>(entity =>
+            {
+                entity.Property(e => e.SurveyId).ValueGeneratedNever();
+
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.SurveyFooterText)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SurveyIntro)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Company)
+                    .WithMany(p => p.Survey)
+                    .HasForeignKey(d => d.CompanyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Survey_Company");
+
+                entity.HasOne(d => d.SurveyType)
+                    .WithMany(p => p.Survey)
+                    .HasForeignKey(d => d.SurveyTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Survey_SurveyType");
+            });
+
+            modelBuilder.Entity<SurveyOption>(entity =>
+            {
+                entity.HasKey(e => e.OptionId);
+
+                entity.Property(e => e.OptionId).ValueGeneratedNever();
+
+                entity.Property(e => e.OptionName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.OptionType)
+                    .WithMany(p => p.SurveyOption)
+                    .HasForeignKey(d => d.OptionTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SurveyOption_SurveyOptionType");
+
+                entity.HasOne(d => d.Question)
+                    .WithMany(p => p.SurveyOption)
+                    .HasForeignKey(d => d.QuestionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SurveyOption_SurveyQuestion");
+            });
+
+            modelBuilder.Entity<SurveyOptionType>(entity =>
+            {
+                entity.HasKey(e => e.OptionTypeId);
+
+                entity.Property(e => e.OptionTypeId).ValueGeneratedNever();
+
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<SurveyQuestion>(entity =>
+            {
+                entity.HasKey(e => e.QuestionId)
+                    .HasName("PK_Question");
+
+                entity.Property(e => e.QuestionId).ValueGeneratedNever();
+
+                entity.Property(e => e.QuestionName)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ShortQuestionName)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Survey)
+                    .WithMany(p => p.SurveyQuestion)
+                    .HasForeignKey(d => d.SurveyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SurveyQuestion_Survey");
+            });
+
+            modelBuilder.Entity<SurveyResponse>(entity =>
+            {
+                entity.HasKey(e => e.ResponseId);
+
+                entity.Property(e => e.ResponseId).ValueGeneratedNever();
+
+                entity.Property(e => e.DateEntered)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.SavedValue).HasMaxLength(2000);
+
+                entity.HasOne(d => d.Option)
+                    .WithMany(p => p.SurveyResponse)
+                    .HasForeignKey(d => d.OptionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SurveyResponse_SurveyOption");
+
+                entity.HasOne(d => d.Survey)
+                    .WithMany(p => p.SurveyResponse)
+                    .HasForeignKey(d => d.SurveyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SurveyResponse_Survey");
+            });
+
+            modelBuilder.Entity<SurveyType>(entity =>
+            {
+                entity.Property(e => e.SurveyTypeId).ValueGeneratedNever();
+
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+            });
+        }
+    }
+}

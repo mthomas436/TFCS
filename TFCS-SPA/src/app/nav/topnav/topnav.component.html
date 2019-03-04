@@ -1,0 +1,93 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" [routerLink]="['/home']">Bellmore & Associates</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#collapsibleNavbar"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/home']"
+          ><i class="fa fa-home" aria-hidden="true"></i> Home</a
+        >
+      </li>
+      <li *ngIf="loggedIn()" class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/trades']">Menu Item 1</a>
+      </li>
+      <li *ngIf="loggedIn()" class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/membertrades']">Menu Item 2</a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          routerLinkActive="active"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Admin
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['admin/companylist']">
+            Edit Company
+          </a>
+          <a class="dropdown-item" [routerLink]="['admin/rolemanager']">Role Manager</a>
+          <a class="dropdown-item" [routerLink]="['admin/usermanager']">User Manager</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav navright">
+      <li *ngIf="!loggedIn()" class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/auth/login']"
+          ><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a
+        >
+      </li>
+      <li *ngIf="!loggedIn()" class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/auth/register']"
+          ><i class="fa fa-user" aria-hidden="true"></i> Register</a
+        >
+      </li>
+
+      <li *ngIf="loggedIn()" class="nav-item dropdown">
+        <div>
+          <span class="profileImage">
+            <img
+              src="https://randomuser.me/api/portraits/men/{{ userId }}.jpg"
+            />
+          </span>
+          <a
+            class="nav-link dropdown-toggle profilename"
+            id="navbarDropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            {{ userfullname | titlecase }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" (click)="logOut()">Logout</a>
+            <a class="dropdown-item" [routerLink]="['/editprofile']"
+              >Edit Profile</a
+            >
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

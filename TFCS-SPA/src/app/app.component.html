@@ -1,0 +1,24 @@
+<app-topnav></app-topnav>
+
+<!-- If not logged in -->
+<div *ngIf="!authService.loggedIn()" class="container-fluid">
+  <div class="row full-width-row">
+    <div class="col-12 ml-2 p-2">
+       <app-default *ngIf="!authService.loggedIn()"></app-default>
+    </div>
+  </div>
+</div>
+
+
+<!-- If logged in -->
+<div *ngIf="authService.loggedIn()" class="container-fluid">
+  <div class="row full-width-row">
+    <div class="col-2">
+      <app-leftnav></app-leftnav>
+    </div>
+    <div class="col-10 ml-2 p-2">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+

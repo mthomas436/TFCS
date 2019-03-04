@@ -1,0 +1,99 @@
+ALTER DATABASE [TFCS]
+SET OFFLINE
+WITH ROLLBACK IMMEDIATE
+GO
+DROP DATABASE [TFCS]
+GO
+
+
+
+INSERT INTO [dbo].[Companies] (Name,Description,LogoImagePath,Active) VALUES ('Arlington Heights Ford', NULL, 'assets/images/companylogos/ahf.jpg', 1);
+INSERT INTO [dbo].[Companies] (Name,Description,LogoImagePath,Active) VALUES ('Biggers Chevy', NULL, 'assets/images/companylogos/biggerschevy.png', 1);
+INSERT INTO [dbo].[Companies] (Name,Description,LogoImagePath,Active) VALUES ('Biggers Mazda', NULL, 'assets/images/companylogos/biggersmazda.png', 1);
+INSERT INTO [dbo].[Companies] (Name,Description,LogoImagePath,Active) VALUES ('Biggers Mitsubishi', NULL, 'assets/images/companylogos/biggersmitsu.png', 1);
+INSERT INTO [dbo].[Companies] (Name,Description,LogoImagePath,Active) VALUES ('Buss Ford', NULL, 'assets/images/companylogos/bussford.png', 1);
+INSERT INTO [dbo].[Companies] (Name,Description,LogoImagePath,Active) VALUES ('Santa Margarita Ford', NULL, 'assets/images/companylogos/santamargaritaford.png', 1);
+INSERT INTO [dbo].[Companies] (Name,Description,LogoImagePath,Active) VALUES ('Schaumburg Mitsubishi', NULL, 'assets/images/companylogos/schaumburgmitsu.png', 1);
+INSERT INTO [dbo].[Companies] (Name,Description,LogoImagePath,Active) VALUES ('State Road Auto Repair', NULL, 'assets/images/companylogos/stateroad.png', 1);
+INSERT INTO [dbo].[Companies] (Name,Description,LogoImagePath,Active) VALUES ('Wickstrom', NULL, 'assets/images/companylogos/wickstrom.png', 1);
+
+
+
+INSERT INTO [dbo].[SurveyCategoryItems]  (Name) VALUES  ('View Reports');
+INSERT INTO [dbo].[SurveyCategoryItems]  (Name) VALUES  ('View Survey Page');
+INSERT INTO [dbo].[SurveyCategoryItems]  (Name) VALUES  ('View Bad Emails');
+INSERT INTO [dbo].[SurveyCategoryItems]  (Name) VALUES  ('Add Survey Data');
+
+INSERT INTO [dbo].[SurveyTypes] (Description) VALUES ('New Car Survey');
+INSERT INTO [dbo].[SurveyTypes] (Description) VALUES ('Service Survey');
+INSERT INTO [dbo].[SurveyTypes] (Description) VALUES ('Unsold Followup Survey');
+
+
+ 
+INSERT INTO [dbo].[Surveys] (CompanyId,Active,SurveyTypeId,SurveyCategoryItemsCatId) VALUES (1,1,1,1);
+
+
+
+ 
+INSERT INTO [dbo].[StandardMenuItems]  ([Name]) VALUES  ('View Reports');
+INSERT INTO [dbo].[StandardMenuItems]  ([Name]) VALUES  ('View Bad Emails');
+INSERT INTO [dbo].[StandardMenuItems]  ([Name]) VALUES  ('Add Survey Data');
+INSERT INTO [dbo].[StandardMenuItems]  ([Name]) VALUES  ('View Marketing Email');
+
+
+INSERT INTO [dbo].[SurveyOptionTypes]  ([Description]) VALUES  ('checkbox');
+INSERT INTO [dbo].[SurveyOptionTypes]  ([Description]) VALUES  ('radio');
+INSERT INTO [dbo].[SurveyOptionTypes]  ([Description]) VALUES  ('shorttext');
+INSERT INTO [dbo].[SurveyOptionTypes]  ([Description]) VALUES  ('longtext');
+INSERT INTO [dbo].[SurveyOptionTypes]  ([Description]) VALUES  ('select');
+
+ 
+QuestionId	SurveyId	QuestionName	ShortQuestionName	QuestionOrder
+2	32	Was your overall service a 5 star rating?	Was your overall service a 5 star rating?	1
+3	32	Was you overall Service Advisor a 5 star rating?	Was you overall Service Advisor a 5 star rating?	2
+4	32	Did you service Advisor go over your report card?	Did you service Advisor go over your report card?	3
+5	32	Was the overall quality of work performed a 5 star rating?	Was the overall quality of work performed a 5 star rating?	4
+6	32	Was the overall process of picking up the vehicle a 5 star rating?	Was the overall process of picking up the vehicle a 5 star rating?	5
+7	32	Following through on committments a 5 star rating?	Following through on committments a 5 star rating?	6
+8	32	Was the dealership quality a 5 star rating?	Was the dealership quality a 5 star rating?	7
+9	32	Additional comments or suggestions:	Additional comments or suggestions:	8
+
+--Surveys
+SurveyId	CompanyId	Active	SurveyTypeId	SurveyFooterText	SurveyIntro
+31	1	0	1	NULL	NULL
+32	1	1	2	Thank you for participation in our survey.
+You may be receiving a survey from Ford Motor Company.
+If you cannot fill out this survey as completely satisfied, please contact Service Director Jerry Hood at 847-870-1300.	Thank you for being a loyal Arlington Heights Ford customer
+Please assist us by completing the following survey
+33	1	0	3	NULL	NULL
+34	2	1	2	NULL	NULL
+
+
+-_Survey Options
+OptionId	QuestionId	OptionName	OptionTypeId
+2	2	Yes	2
+3	2	No	2
+6	3	Yes	2
+7	3	No	2
+8	4	Yes	2
+9	4	No	2
+10	5	Yes	2
+11	5	No	2
+12	6	Yes	2
+13	6	No	2
+14	7	Yes	2
+15	7	No	2
+16	8	Yes	2
+17	8	No	2
+18	9	Additional comments or suggestions:	4
+
+
+
+
+
+
+Scaffold-DbContext "Server=DESKTOP-OI2KT74;Initial Catalog=TFCS;Integrated Security=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir ModelsTest
+
+
+
+dotnet ef dbcontext scaffold "Server=DESKTOP-OI2KT74;Initial Catalog=TFCS;Integrated Security=True" Microsoft.EntityFrameworkCore.SqlServer -o ModelsTest

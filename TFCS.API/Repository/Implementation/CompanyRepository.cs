@@ -69,6 +69,15 @@ namespace TFCS.API.Repository.Implementation
             return company;
         }
 
+        public async Task<Survey> GetSurveyQuestions(SurveyPropDto surveyprop)
+        {
+            var survey = await db.Surveys
+                         .Include(q => q.SurveyQuestions)
+                         .ThenInclude(o => o.SurveyOptions)
+                         .Where(s => s.CompanyId == surveyprop.CompanyId && s.SurveyId == surveyprop.SurveyId)
+                         .FirstOrDefaultAsync();
+            return survey;
+        }
 
         public async Task AddSurveyToCompany(Survey survey)
         {

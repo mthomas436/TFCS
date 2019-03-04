@@ -8,6 +8,7 @@ import { SurveyType } from '../_models/surveytype';
 import { Role } from '../_models/role';
 import { RoleToCreate } from '../_models/roletocreate';
 import { User } from '../_models/user';
+import { SurveyProp } from '../_models/surveyprop';
  
 
 @Injectable({
@@ -61,4 +62,11 @@ export class AdminService {
   getCompanyUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.baseUrl + 'getuserlist');
   }
+
+
+
+  getQuestions(surveyProp: SurveyProp): Observable<Survey> {
+    return this.http.post<Survey>(this.baseUrl + 'getsurveyquestions', surveyProp);
+  }
+
 }

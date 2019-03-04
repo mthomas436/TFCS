@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SurveyProp } from '../_models/surveyprop';
 import { Company } from '../_models/company';
+import { Survey } from '../_models/survey';
 
 @Injectable({
   providedIn: 'root'

@@ -31,5 +31,7 @@ namespace TFCS.API.Controllers
             var company = await uw.CompanyDetailedRepo.GetCompanySurvey(surveyprop);
             return Ok(company);
         }
+
+        
     }
 }

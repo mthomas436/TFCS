@@ -24,7 +24,8 @@ export class EditCompanyComponent implements OnInit {
   active: boolean;
   surveyList: Survey[];
   surveyToAdd: SurveyToAdd;
-  constructor(private adminService: AdminService, private toastr: ToastrService, router: Router, private route: ActivatedRoute) { }
+
+  constructor(private adminService: AdminService, private toastr: ToastrService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.selectedSurveyTypes = [];
@@ -59,6 +60,7 @@ export class EditCompanyComponent implements OnInit {
       });
       this.selectedSurveyTypes = currentSurveys;
 
+      this.surveyList = company.surveys;
 
     }, error => {
       this.toastr.error(error);
@@ -148,5 +150,11 @@ export class EditCompanyComponent implements OnInit {
 
 
 
+  }
+
+
+
+  editSurvey(survey: Survey) {
+      this.router.navigate(['admin/editsurvey/questions/' + survey.companyId + '/' + survey.surveyId]);
   }
 }

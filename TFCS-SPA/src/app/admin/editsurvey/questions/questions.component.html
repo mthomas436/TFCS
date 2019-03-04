@@ -1,0 +1,27 @@
+<h3>Edit Survey Questions</h3>
+<hr>
+
+<table class="table">
+  <tr>
+    <th>QuestionId</th>
+    <th>Question Name</th>
+    <th>Question Order</th>
+    <th>Question Type</th>
+    <th>Required</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let question of survey.surveyQuestions">
+    <td>{{question.questionId}}</td>
+    <td>{{question.questionName}}</td>
+    <td>{{question.questionOrder}}</td>
+    <td>{{question.questionType}}</td>
+    <td>{{question.required}}</td>
+    <td>
+      <button class="btn btn-primary btn-sm">Edit</button>
+      <button class="btn btn-danger btn-sm">Delete</button>
+    </td>
+  </tr>
+</table>
+
+
+<pre>{{survey | json}}</pre>

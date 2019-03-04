@@ -15,7 +15,23 @@
         <div class="d-flex justify-content-end p-3"><button type="button" class="btn btn-primary" (click)="updateCompany()">Save Changes</button></div>
     </p-tabPanel>
     <p-tabPanel header="Add / Edit Surveys">
-
+        
+        <table class="table table-striped table-bordered table-hover">
+         <tr>
+            <th style="width:5%">Id</th>
+            <th>Name</th>     
+            <th style="width:10%"></th>                     
+         </tr>
+         <tr *ngFor="let survey of surveyList">
+            <td>{{survey.surveyId}}</td>
+            <td>{{survey.surveyTypes.description}}</td>
+            <td>
+                <button class="btn btn-sm btn-primary" (click)="editSurvey(survey)">Edit</button>
+            </td>
+         </tr>
+        </table>
+        
+        <pre>{{surveyList | json}}</pre>
     </p-tabPanel>
     <p-tabPanel header="Survey Status">
           <p-card header="Add / Remove Surveys" subheader="Click to Select" [style]="{width: '360px'}" styleClass="ui-card-shadow">
@@ -26,8 +42,10 @@
                   <div *ngFor="let type of surveyTypes">
                    <p-checkbox  name="grpsurveytypes" [value]="type.surveyTypeId" [label]="type.description" [(ngModel)]="selectedSurveyTypes"></p-checkbox>
                   </div>
+                  
 
-                  {{selectedSurveyTypes | json}}
+
+                **  {{selectedSurveyTypes | json}}
              </div>
                   
               <p-footer>
@@ -42,3 +60,5 @@
 </p-tabView>
 
 {{company | json}}
+
+<app-question></app-question>

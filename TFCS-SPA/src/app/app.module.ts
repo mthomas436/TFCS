@@ -52,6 +52,7 @@ import { QuestionService } from './_services/question.service';
 import { QuestionControlService } from './_services/question-control.service';
 import { EditUserComponent } from './admin/usermanager/edituser/edituser.component';
 import { AddSurveyDataComponent } from './survey/addsurveydata/addsurveydata.component';
+import { QuestionsComponent } from './admin/editsurvey/questions/questions.component';
 
 
 export function tokenGetter() {
@@ -90,7 +91,8 @@ export function jwtOptionsFactory() {
       DynamicFormComponent,
       DynamicFormQuestionComponent,
       EditUserComponent,
-      AddSurveyDataComponent
+      AddSurveyDataComponent,
+      QuestionsComponent
    ],
    imports: [
       BrowserModule,

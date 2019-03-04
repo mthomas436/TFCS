@@ -166,5 +166,16 @@ namespace TFCS.API.Controllers
         }
 
 
+
+        [HttpPost("getsurveyquestions", Name = "GetSurveyQuestions")]
+        public async Task<IActionResult> GetSurveyQuestions(SurveyPropDto surveyprop)
+        {
+            if (surveyprop.CompanyId == 0)
+                return NotFound();
+
+            var survey = await uw.CompanyDetailedRepo.GetSurveyQuestions(surveyprop);
+            return Ok(survey);
+        }
+
     }
 }

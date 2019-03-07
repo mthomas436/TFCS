@@ -10,7 +10,10 @@
         <div [ngSwitch]="question.controlType">
       
           <div *ngSwitchCase="'text'">
-              <input class="form-control surveytext"  [formControlName]="question.key" [id]="question.key" type="text">
+            <div *ngFor="let opt of question.options">
+                <input class="form-control surveytext"  [formControlName]="question.key" [id]="opt.id" type="text">
+            </div>
+             
           </div>
            
           <div *ngSwitchCase="'date'">
@@ -23,18 +26,21 @@
 
           <div *ngSwitchCase="'radio'">
             <label *ngFor="let opt of question.options"  class="radio-inline mr-1">
-              <input type="radio" [id]="question.key" [formControlName]="question.key" [value]="opt.key">{{opt.value}}
+              <input type="radio" [id]="opt.id" [formControlName]="question.key" [value]="opt.key">{{opt.value}}
             </label>
           </div>
 
           <div *ngSwitchCase="'checkbox'">
               <label *ngFor="let opt of question.options"  class="radio-inline mr-1">
-                <input type="checkbox" [id]="question.key" [formControlName]="question.key" [value]="opt.key">{{opt.value}}
+                <input type="checkbox" [id]="opt.id" [formControlName]="question.key" [value]="opt.key">{{opt.value}}
               </label>
             </div>          
 
           <div *ngSwitchCase="'memo'">
-              <textarea class="form-control ta" [formControlName]="question.key" [id]="question.key"></textarea>
+            <div *ngFor="let opt of question.options">
+                <textarea class="form-control ta" [formControlName]="question.key" [id]="opt.id"></textarea>
+            </div>
+              
           </div>    
 
   

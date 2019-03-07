@@ -1,0 +1,57 @@
+ 
+
+  <div class="text-right mb-2"><button (click)="addNew()" class="btn btn-primary btn-sm">Add New</button></div>
+  
+  <div *ngIf="question.surveyOptions">
+    <table class="table">
+      <tr>
+        <th>Id</th>
+        <th>Option Name</th>
+        <th>Option Type</th>
+        <th>Option Order</th>
+        <th>Option Group</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let option of question.surveyOptions" [attr.id]="option.optionId">
+        <td>{{option.optionId}}</td>
+        <td><input type="text" class="form-control" [value]="option.optionName" attr.data-property="optionname"  (change)="saveChanges($event, option)"></td>
+        <td>
+          <select class="form-control" (change)="saveChanges($event, option)" [value]="option.optionTypeId">
+            <option value=""></option>
+            <option *ngFor="let type of optionTypes" [value]="type.optionTypeId" attr.data-property="optiontype"  [selected]="option.optionTypeId === type.optionTypeId ? true : null">{{type.description}}</option>
+          </select>
+        </td>
+        <td><input type="text" class="form-control" [value]="option.optionOrder" attr.data-property="optionorder" (change)="saveChanges($event, option)"></td>
+        <td><input type="text" class="form-control" [value]="option.optionGroup" attr.data-property="optiongroup" (change)="saveChanges($event, option)"></td>
+        <td><button class="btn btn-danger btn-sm" (click)="deleteOption(option)">Delete</button></td>
+      </tr>
+    </table>
+
+    <div *ngIf="newOption">
+      <table class="table">
+        <tr>
+          <th>Option Name</th>
+          <th>Option Type</th>
+          <th>Option Order</th>
+          <th>Option Group</th>
+          <th></th>
+        </tr>
+        <tr>
+          <td><input type="text" class="form-control" [(ngModel)]="newOptionName" attr.data-property="optionorder"></td>
+          <td>
+            <select class="form-control" [(ngModel)]="newOptionTypeId">
+              <option value=""></option>
+              <option *ngFor="let type of optionTypes" [value]="type.optionTypeId" >{{type.description}}</option>
+            </select>          
+          </td>
+          <td><input type="text" class="form-control" [(ngModel)]="newOptionOrder"></td>
+          <td><input type="text" class="form-control" [(ngModel)]="newOptionGroup"></td>
+          <td><button class="btn btn-primary btn-sm" (click)="addNewOption()">Add</button></td>
+        </tr>        
+      </table>
+    </div>
+  </div>
+ 
+  <div class="text-right">
+    <i *ngIf="showSaveIcon" class="fa fa-floppy-o" aria-hidden="true"></i>
+  </div>

@@ -23,8 +23,6 @@ namespace TFCS.API.DomainModels.Entities
         public virtual DbSet<SurveyResponse> SurveyResponses { get; set; }
         public virtual DbSet<SurveyType> SurveyTypes { get; set; }
         public virtual DbSet<Survey> Surveys { get; set; }
-        public virtual DbSet<VehicleMake> VehicleMakes { get; set; }
-        public virtual DbSet<VehicleModel> VehicleModels { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
         public virtual DbSet<CompanySurveyCatItem> CompanySurveyCatItems { get; set; }
         public virtual DbSet<StandardMenuItem> StandardMenuItems { get; set; }
@@ -73,7 +71,16 @@ namespace TFCS.API.DomainModels.Entities
                 .WithMany(x => x.Surveys);
             });  
 
-                         
+
+            modelBuilder.Entity<Company>(entity => 
+            {
+                entity.HasMany(v => v.Vehicles);
+            });  
+
+            modelBuilder.Entity<Vehicle>(entity => 
+            {
+                entity.HasOne(c => c.Company);
+            });
 
             modelBuilder.Entity<SurveyQuestion>(entity =>
             {

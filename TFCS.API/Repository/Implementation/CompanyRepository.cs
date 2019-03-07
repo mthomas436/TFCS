@@ -11,6 +11,7 @@ namespace TFCS.API.Repository.Implementation
     public class CompanyRepository : Repository<Company>, ICompanyRepository
     {
         DataContext db;
+
         public CompanyRepository(DataContext db) : base(db)
         {
             this.db = db;
@@ -72,7 +73,9 @@ namespace TFCS.API.Repository.Implementation
         public async Task<Survey> GetSurveyQuestions(SurveyPropDto surveyprop)
         {
             var survey = await db.Surveys
-                         .Include(q => q.SurveyQuestions)
+                         .Include(t => t.SurveyTypes)
+                         .Include(c => c.Company)
+                         .Include(q => q.SurveyQuestions)                        
                          .ThenInclude(o => o.SurveyOptions)
                          .Where(s => s.CompanyId == surveyprop.CompanyId && s.SurveyId == surveyprop.SurveyId)
                          .FirstOrDefaultAsync();
@@ -113,6 +116,16 @@ namespace TFCS.API.Repository.Implementation
                 db.Surveys.Update(currentSurvey);
             }
 
+        }
+
+        public async Task<SurveyQuestion> UpdateQuestion(SurveyQuestion surveyQuestion)
+        {
+            if(surveyQuestion.QuestionId != 0)
+            {                
+                db.SurveyQuestions.Update(surveyQuestion); 
+            }
+
+            return surveyQuestion;
         }
 
         public async Task<Company> UpdateCompanySurveys(Company company)

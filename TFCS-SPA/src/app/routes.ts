@@ -13,6 +13,7 @@ import { UserListComponent } from './admin/usermanager/userlist/userlist.compone
 import { EditUserComponent } from './admin/usermanager/edituser/edituser.component';
 import { AddSurveyDataComponent } from './survey/addsurveydata/addsurveydata.component';
 import { QuestionsComponent } from './admin/editsurvey/questions/questions.component';
+import { OptionsComponent } from './admin/editsurvey/options/options.component';
 
 export const appRoutes: Routes = [
   { path: 'auth/login', component: LoginComponent },
@@ -35,7 +36,8 @@ export const appRoutes: Routes = [
       { path: 'bademails/:companyid', component: BadEmailsComponent},
       { path: 'survey/viewsurvey/:companyid/:surveyid', component: SurveyQuestionsComponent},
       { path: 'survey/adddata/:companyid/:surveyid', component: AddSurveyDataComponent},
-      { path: 'admin/editsurvey/questions/:companyid/:surveyid', component: QuestionsComponent}
+      { path: 'admin/editsurvey/questions/:companyid/:surveyid', component: QuestionsComponent},
+      { path: 'admin/editsurvey/questions/:surveyid/:questionid', component: OptionsComponent}
       // { path: '**', redirectTo: 'home', pathMatch: 'full'}  survey/adddata/
     ]
   },

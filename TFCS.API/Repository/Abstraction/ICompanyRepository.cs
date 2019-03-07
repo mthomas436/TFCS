@@ -18,5 +18,7 @@ namespace TFCS.API.Repository.Abstraction
 
         Task<Company> GetCompanySurvey(SurveyPropDto surveyprop);
         Task<Survey> GetSurveyQuestions(SurveyPropDto surveyprop);
+
+        Task<SurveyQuestion> UpdateQuestion(SurveyQuestion surveyQuestion);
     }
 }

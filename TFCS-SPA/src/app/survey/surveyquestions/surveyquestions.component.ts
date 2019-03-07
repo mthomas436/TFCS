@@ -66,7 +66,7 @@ export class SurveyQuestionsComponent implements OnInit {
       this.survey = company.surveys[0];
       this.questions = this.survey.surveyQuestions;
 
-      this.createSurveyForm();
+      // this.createSurveyForm();
 
       this.qq = this.qs.getQuestionFormData(this.questions);
 
@@ -82,7 +82,7 @@ export class SurveyQuestionsComponent implements OnInit {
     this.itemsToSave = $('.surveyinput').serialize();
 
   }
-
+/*
   createSurveyForm() {
     this.surveyForm = new FormGroup({
       companyId: new FormControl(this.surveyprop.companyId, [Validators.required, Validators.pattern('^[0-9].*$')]),
@@ -98,7 +98,7 @@ export class SurveyQuestionsComponent implements OnInit {
 
 
   }
-
+*/
   // groupResults(surveyOption: SurveyOption[]) {
   //   Option.
   //   const groups = new Set(this.questions.map(item => surveyOption.questionId));

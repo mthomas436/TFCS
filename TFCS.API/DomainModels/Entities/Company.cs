@@ -31,6 +31,7 @@ namespace TFCS.API.DomainModels.Entities
         public bool? Active { get; set; }
 
         public virtual ICollection<Survey> Surveys { get; set; }
+        public virtual ICollection<Vehicle> Vehicles { get; set; }
 
     }
 }

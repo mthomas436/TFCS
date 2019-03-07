@@ -27,6 +27,19 @@ namespace TFCS.API.Helpers
             CreateMap<User, UserForListDto>()
                 .ForMember(dest => dest.Roles, opt => opt.Ignore());
 
+            CreateMap<QuestionForUpdateDto, SurveyQuestion>()
+                .ForMember(dest => dest.ShortQuestionName, opt => opt.Ignore())
+                .ForMember(dest => dest.SurveyTypeId, opt => opt.Ignore())
+                .ForMember(dest => dest.SurveyOptions, opt => opt.Ignore())
+                .ForMember(dest => dest.Survey, opt => opt.Ignore());
+
+            CreateMap<QuestionForInsertDto, SurveyQuestion>()
+                .ForMember(dest => dest.ShortQuestionName, opt => opt.Ignore())
+                .ForMember(dest => dest.SurveyTypeId, opt => opt.Ignore())
+                .ForMember(dest => dest.SurveyOptions, opt => opt.Ignore())
+                .ForMember(dest => dest.QuestionId, opt => opt.Ignore())
+                .ForMember(dest => dest.Survey, opt => opt.Ignore());                
+
         }
 
 

@@ -1,27 +1,78 @@
-<h3>Edit Survey Questions</h3>
+<h3>Edit {{survey?.company.name}} {{survey?.surveyTypes.description}} Questions</h3>
 <hr>
 
-<table class="table">
+<div class="text-right mb-2">
+  <button class="btn btn-success" (click)="displayNewQuestionForm()">New Question</button>
+</div>
+
+<div><h4>Intro</h4></div>
+<div>
+  <textarea class="form-control" [(ngModel)]="surveyIntro" (change)="updateSurveyInfo()"></textarea>
+</div>
+
+<table *ngIf="survey" class="table table-striped table-bordered mt-2 mb-2">
   <tr>
     <th>QuestionId</th>
     <th>Question Name</th>
-    <th>Question Order</th>
+    <th style="width:40px;">Question Order</th>
     <th>Question Type</th>
     <th>Required</th>
     <th></th>
   </tr>
-  <tr *ngFor="let question of survey.surveyQuestions">
+  <tr *ngFor="let question of surveyQuestions">
     <td>{{question.questionId}}</td>
     <td>{{question.questionName}}</td>
     <td>{{question.questionOrder}}</td>
     <td>{{question.questionType}}</td>
     <td>{{question.required}}</td>
-    <td>
-      <button class="btn btn-primary btn-sm">Edit</button>
-      <button class="btn btn-danger btn-sm">Delete</button>
+    <td style="width:210px;">
+      <button class="btn btn-primary btn-sm" (click)="displayQuestion(question)">Edit</button>
+      <button class="btn btn-info btn-sm" (click)="addOptions(question)">Options</button>
+      <button class="btn btn-danger btn-sm" (click)="deleteQuestion(question)">Delete</button>
     </td>
   </tr>
 </table>
 
+<div><h4>Survey Footer</h4></div>
+<div>
+  <textarea [(ngModel)]="surveyFooter" class="form-control" (change)="updateSurveyInfo()"></textarea>
+</div>
 
-<pre>{{survey | json}}</pre>
+<p-dialog [header]="modalheader" [(visible)]="displayModal" [style]="{width: '600px', height: '200px'}" modal="true" closeOnEscape="true" dismissableMask="true" positionTop="100">
+  <form [formGroup]="questionForm">
+  <div class="form-group">
+    <label for="questionName">Question Name:</label>
+    <input type="text" class="form-control" id="questionName" formControlName="questionName">
+  </div>
+  <div class="form-group">
+    <label for="questionOrder">Question Order:</label>
+    <input type="text" class="form-control" id="questionOrder" formControlName="questionOrder">
+  </div>  
+  <div class="form-group">
+      <label for="questionType">Question Type:</label>
+      <input type="text" class="form-control" id="questionType" formControlName="questionType">
+  </div>  
+  <div class="form-group">
+      <label for="email">Required:</label>
+      <select class="form-control" id="required" formControlName="required">
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+      </select>
+  </div>    
+  <input type="hidden" id="questionid">
+  <div class="text-right">
+    <button class="btn btn-primary btn-sm" (click)="saveChanges()" [hidden]="modalMode==='new'">Save</button>
+    <button class="btn btn-primary btn-sm" (click)="addQuestion()" [hidden]="modalMode==='update'">Add Question</button>
+    <button class="btn btn-danger btn-sm" (click)="closeModal()">Cancel</button>
+  </div>
+ </form>
+</p-dialog>
+
+
+
+<p-dialog [header]="selectedQuestion.questionName" [(visible)]="displayOptionModal" [style]="{width: '800px', height: '200px'}" modal="true" closeOnEscape="true" dismissableMask="true" positionTop="100" (onHide)="cancel()">
+  <div *ngIf="selectedQuestion">
+    <app-options [question]="selectedQuestion" [showNewOption]="false"></app-options>
+  </div>
+
+</p-dialog>

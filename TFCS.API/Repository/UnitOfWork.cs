@@ -13,10 +13,13 @@ namespace TFCS.API.Repository
     {
         private DataContext _db;
         private IRepository<Survey> _SurveyRepo;
-        private IRepository<VehicleMake> _MakeRepo;
+        private IRepository<SurveyQuestion> _SurveyQuestionRepo;
+
         private IRepository<Company> _CompanyRepo;
         private IRepository<SurveyType> _SurveyTypeRepo;
         private IRepository<StandardMenuItem> _StandardMenuItemRepo;
+        private IRepository<SurveyOptionType> _SurveyOptionTypeRepo;
+        private IRepository<SurveyOption> _SurveyOptionRepo;
 
         ICompanyRepository _companyDetailedRepo;
 
@@ -39,17 +42,44 @@ namespace TFCS.API.Repository
         }
 
 
-        public IRepository<VehicleMake> VehicleMakeRepo
-        {
+        public IRepository<SurveyQuestion> SurveyQuestionRepo 
+        {  
             get
             {
-                if (_MakeRepo == null)
+                if (_SurveyQuestionRepo == null)
                 {
-                    _MakeRepo = new Repository<VehicleMake>(_db);
+                    _SurveyQuestionRepo = new Repository<SurveyQuestion>(_db);
                 }
-                return _MakeRepo;
-            }
+                return _SurveyQuestionRepo;
+            }            
         }
+
+        public IRepository<SurveyOptionType> SurveyOptionTypeRepo 
+        { 
+            get
+            {
+                if (_SurveyOptionTypeRepo == null)
+                {
+                    _SurveyOptionTypeRepo = new Repository<SurveyOptionType>(_db);
+                }
+                return _SurveyOptionTypeRepo; 
+            }
+        
+        }
+
+        public IRepository<SurveyOption> SurveyOptionRepo 
+        { 
+            get
+            {
+                if (_SurveyOptionRepo == null)
+                {
+                    _SurveyOptionRepo = new Repository<SurveyOption>(_db);
+                }
+                return _SurveyOptionRepo; 
+            }
+        
+        }        
+
 
         public IRepository<StandardMenuItem> StandardMenuItemsRepo
         { get

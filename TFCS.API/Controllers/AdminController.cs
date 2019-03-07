@@ -165,17 +165,5 @@ namespace TFCS.API.Controllers
            // return Ok( mapper.Map<ICollection<UserForListDto>>(userManager.Users) );
         }
 
-
-
-        [HttpPost("getsurveyquestions", Name = "GetSurveyQuestions")]
-        public async Task<IActionResult> GetSurveyQuestions(SurveyPropDto surveyprop)
-        {
-            if (surveyprop.CompanyId == 0)
-                return NotFound();
-
-            var survey = await uw.CompanyDetailedRepo.GetSurveyQuestions(surveyprop);
-            return Ok(survey);
-        }
-
     }
 }

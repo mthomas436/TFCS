@@ -12,10 +12,16 @@ namespace TFCS.API.DomainModels.Entities
 
         [Column(TypeName = "VARCHAR(50)")]
         [StringLength(50)]        
-        public string Vin { get; set; }
+        public string VIN { get; set; }
         public int Year { get; set; }
-        public int MakeId { get; set; }
-        public int ModelId { get; set; }
+
+        [Column(TypeName = "VARCHAR(50)")]
+        [StringLength(50)]              
+        public string Make { get; set; }
+
+        [Column(TypeName = "VARCHAR(50)")]
+        [StringLength(50)]              
+        public string Model { get; set; }
         public int CompanyId { get; set; }
 
         [Column(TypeName = "VARCHAR(50)")]
@@ -27,14 +33,16 @@ namespace TFCS.API.DomainModels.Entities
         public string CustomerEmail { get; set; }
 
         [Column(TypeName = "VARCHAR(50)")]
-        [StringLength(50)]        
+        [StringLength(50)]  
+        [Phone]      
         public string CustHomePhone { get; set; }
 
         [Column(TypeName = "VARCHAR(50)")]
-        [StringLength(50)]        
+        [StringLength(50)]      
+        [Phone]  
         public string CustCellPhone { get; set; }
 
-        // public virtual Company Company { get; set; }
+        public virtual Company Company { get; set; }
         // public virtual VehicleMake Make { get; set; }
         // public virtual VehicleModel Model { get; set; }
  

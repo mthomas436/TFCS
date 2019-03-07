@@ -11,10 +11,15 @@ namespace TFCS.API.Repository
     public interface IUnitOfWork
     {
         IRepository<Survey> SurveyRepo { get; }
-        IRepository<VehicleMake> VehicleMakeRepo { get; }
         IRepository<Company> CompanyRepo { get; }
         IRepository<SurveyType> SurveyTypeRepo { get; }
         IRepository<StandardMenuItem> StandardMenuItemsRepo { get; }
+
+        IRepository<SurveyQuestion> SurveyQuestionRepo { get; }
+
+        IRepository<SurveyOptionType> SurveyOptionTypeRepo { get; }
+
+        IRepository<SurveyOption> SurveyOptionRepo { get; }
 
         ICompanyRepository CompanyDetailedRepo { get; }
         Task<int> SaveChanges();
